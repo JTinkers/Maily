@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Maily.Data": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "CONTEXT_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

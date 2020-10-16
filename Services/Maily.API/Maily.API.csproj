@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.Types.Filters" Version="10.5.2" />
+    <PackageReference Include="HotChocolate.Types.Selections" Version="10.5.2" />
+    <PackageReference Include="HotChocolate.Types.Sorting" Version="10.5.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maily.Data\Maily.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Schema\MailGroupMails\Objects\" />
+    <Folder Include="Schema\MailGroups\Objects\" />
+    <Folder Include="Schema\Mails\Objects\" />
+    <Folder Include="Schema\Users\Objects\" />
+  </ItemGroup>
+
+
+</Project>
