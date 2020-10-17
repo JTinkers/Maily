@@ -1,6 +1,6 @@
 ﻿namespace Maily.API.Schema.Users
 {
-    public enum UserSignUpResult : short
+    public enum UserSignUpErrorCode : short
     {
         UsernameNotUnique
     }

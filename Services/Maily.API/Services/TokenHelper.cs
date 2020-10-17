@@ -20,10 +20,8 @@ namespace Maily.API.Services
             _hasher = hasher;
         }
 
-        public string CreateToken(User user)
+        public string CreateToken(string data)
         {
-            var data = user.Id + ";" + user.Username;
-
             return _hasher.CreateHash(data);
         }
 

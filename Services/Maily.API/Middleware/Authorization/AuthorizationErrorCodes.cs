@@ -1,6 +1,6 @@
 ﻿namespace Maily.API.Middleware.Authorization
 {
-    public enum AuthorizationResult : short
+    public enum AuthorizationErrorCodes : short
     {
         NoToken,
         NoAssociatedUser

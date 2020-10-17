@@ -25,7 +25,7 @@ namespace Maily.API.Middleware.Authorization
             if (token == null)
             {
                 context.ReportError(ErrorBuilder.New()
-                    .SetCode(AuthorizationResult.NoToken.ToString())
+                    .SetCode(AuthorizationErrorCodes.NoToken.ToString())
                     .SetMessage("No authorization token provided!")
                     .Build());
 
@@ -35,7 +35,7 @@ namespace Maily.API.Middleware.Authorization
             if (user == null)
             {
                 context.ReportError(ErrorBuilder.New()
-                    .SetCode(AuthorizationResult.NoAssociatedUser.ToString())
+                    .SetCode(AuthorizationErrorCodes.NoAssociatedUser.ToString())
                     .SetMessage("Provided authorization token isn't associated with a valid user!")
                     .Build());
 

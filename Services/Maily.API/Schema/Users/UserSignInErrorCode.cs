@@ -1,6 +1,6 @@
 ﻿namespace Maily.API.Schema.Users
 {
-    public enum UserSignInResult : short
+    public enum UserSignInErrorCode : short
     {
         UserNotFound,
         PasswordMismatch

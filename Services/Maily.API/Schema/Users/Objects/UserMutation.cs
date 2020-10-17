@@ -27,7 +27,7 @@ namespace Maily.API.Schema.Users.Objects
             if(_context.Users.Any(x => x.Username == username))
             {
                 resolverContext.ReportError(ErrorBuilder.New()
-                    .SetCode(UserSignUpResult.UsernameNotUnique.ToString())
+                    .SetCode(UserSignUpErrorCode.UsernameNotUnique.ToString())
                     .SetMessage("Username is not unique!")
                     .Build());
 
@@ -44,7 +44,8 @@ namespace Maily.API.Schema.Users.Objects
             _context.Add(user);
             _context.SaveChanges();
 
-            user.Token = _tokenizer.CreateToken(user);
+            // Create token from Id and Username to ensure unique hash
+            user.Token = _tokenizer.CreateToken(user.Id + ";" + user.Username);
 
             _context.Update(user);
             _context.SaveChanges();
@@ -64,7 +65,7 @@ namespace Maily.API.Schema.Users.Objects
             if (user == null)
             {
                 resolverContext.ReportError(ErrorBuilder.New()
-                    .SetCode(UserSignInResult.UserNotFound.ToString())
+                    .SetCode(UserSignInErrorCode.UserNotFound.ToString())
                     .SetMessage("User of given username was not found!")
                     .Build());
 
@@ -74,7 +75,7 @@ namespace Maily.API.Schema.Users.Objects
             if (!_hasher.IsMatching(password, user.Password))
             {
                 resolverContext.ReportError(ErrorBuilder.New()
-                    .SetCode(UserSignInResult.PasswordMismatch.ToString())
+                    .SetCode(UserSignInErrorCode.PasswordMismatch.ToString())
                     .SetMessage("Wrong password!")
                     .Build());
 
