@@ -38,10 +38,13 @@ namespace Maily.API
 
             _schema = SchemaBuilder.New()
                 .AddQueryType<QueryType>()
-                //.AddMutationType<MutationType>()
+                .AddMutationType<MutationType>()
                 .AddType<MailType>()
                 .AddType<UserType>()
                 .AddType<MailGroupType>()
+                .AddType<MailGroupCreateInputType>()
+                .AddType<MailGroupUpdateInputType>()
+                .AddType<MailGroupDeleteInputType>()
                 .AddType<MailGroupMailType>()
                 .ModifyOptions(x => x.DefaultBindingBehavior = BindingBehavior.Explicit)
                 .Create();
