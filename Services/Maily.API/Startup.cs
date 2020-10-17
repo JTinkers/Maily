@@ -12,11 +12,11 @@ using HotChocolate.Types;
 using Maily.API.Schema.MailGroupMails.Types;
 using Maily.API.Schema.MailGroups.Types;
 using Maily.API.Schema.Mails.Types;
-using Maily.API.Schema.Root.Types;
 using Maily.API.Schema.Users.Types;
 using Maily.API.Services;
 using Maily.Data.Contexts;
-using Microsoft.AspNetCore.Http;
+using Maily.API.Schema.Users;
+using Maily.API.Middleware.Authorization;
 
 namespace Maily.API
 {
@@ -33,19 +33,32 @@ namespace Maily.API
                 MaxOperationComplexity = 256,
                 IncludeExceptionDetails = Environment.IsDevelopment(),
                 ExecutionTimeout = new TimeSpan(0, 0, 10),
-                ForceSerialExecution = false
+                ForceSerialExecution = true
             };
 
             _schema = SchemaBuilder.New()
-                .AddQueryType<QueryType>()
-                .AddMutationType<MutationType>()
+                .AddQueryType(x => x.Name("Query"))
+                .AddMutationType(x => x.Name("Mutation"))
+                .AddEnumType<AuthorizationResult>(x => x.BindValuesImplicitly())
+                .AddEnumType<UserSignUpResult>(x => x.BindValuesImplicitly())
+                .AddEnumType<UserSignInResult>(x => x.BindValuesImplicitly())
                 .AddType<MailType>()
-                .AddType<UserType>()
+                .AddType<MailQueryType>()
+                .AddType<MailMutationType>()
+                .AddType<MailCreateInputType>()
+                .AddType<MailUpdateInputType>()
+                .AddType<MailDeleteInputType>()
+                .AddType<UserMutationType>()
+                .AddType<UserSignUpPayloadType>()
+                .AddType<UserSignInPayloadType>()
                 .AddType<MailGroupType>()
+                .AddType<MailGroupQueryType>()
+                .AddType<MailGroupMutationType>()
                 .AddType<MailGroupCreateInputType>()
                 .AddType<MailGroupUpdateInputType>()
                 .AddType<MailGroupDeleteInputType>()
                 .AddType<MailGroupMailType>()
+                .AddType<MailGroupMailQueryType>()
                 .ModifyOptions(x => x.DefaultBindingBehavior = BindingBehavior.Explicit)
                 .Create();
         }
@@ -65,7 +78,8 @@ namespace Maily.API
 
             services.AddHttpContextAccessor();
             services.AddGraphQL(_schema, _queryExecutionOptions);
-            services.AddScoped<TokenHelper>();
+            services.AddScoped<Hasher>();
+            services.AddScoped<Tokenizer>();
         }
 
         public void Configure(IApplicationBuilder app)

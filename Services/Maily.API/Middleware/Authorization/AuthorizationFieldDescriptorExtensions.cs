@@ -9,7 +9,7 @@ namespace Maily.API.Middleware.Authorization
         public static IObjectFieldDescriptor UseAuthorization(this IObjectFieldDescriptor descriptor)
         {
             return descriptor.Use((services, next)
-                => new Authorizator(next, services.GetRequiredService<TokenHelper>()));
+                => new Authorizator(next, services.CreateScope().ServiceProvider.GetRequiredService<Tokenizer>()));
         }
     }
 }

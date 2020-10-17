@@ -36,8 +36,6 @@ D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.As
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.AspNetCore.HttpGetSchema.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.AspNetCore.HttpPost.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.AspNetCore.Subscriptions.dll
-D:\Git Projects\Maily\Services\Maily.API\obj\Debug\netcoreapp3.1\Maily.API.csproj.CoreCompileInputs.cache
-D:\Git Projects\Maily\Services\Maily.API\obj\Debug\netcoreapp3.1\Maily.API.MvcApplicationPartsAssemblyInfo.cache
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\Castle.Core.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.Types.Filters.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\HotChocolate.Types.Selections.dll
@@ -89,3 +87,6 @@ D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\Microsoft.Exten
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\Maily.Data.dll
 D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\Maily.Data.pdb
+D:\Git Projects\Maily\Services\Maily.API\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll
+D:\Git Projects\Maily\Services\Maily.API\obj\Debug\netcoreapp3.1\Maily.API.csproj.CoreCompileInputs.cache
+D:\Git Projects\Maily\Services\Maily.API\obj\Debug\netcoreapp3.1\Maily.API.MvcApplicationPartsAssemblyInfo.cache

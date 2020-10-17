@@ -9,18 +9,18 @@ namespace Maily.API.Middleware.Authorization
     {
         private FieldDelegate _next { get; set; }
 
-        private TokenHelper _tokenHelper { get; set; }
+        private Tokenizer _tokenizer { get; set; }
 
-        public Authorizator(FieldDelegate next, TokenHelper tokenHelper)
+        public Authorizator(FieldDelegate next, Tokenizer tokenizer)
         {
             _next = next;
-            _tokenHelper = tokenHelper;
+            _tokenizer = tokenizer;
         }
 
         public async Task InvokeAsync(IMiddlewareContext context)
         {
-            var token = _tokenHelper.GetToken();
-            var user = _tokenHelper.GetUser();
+            var token = _tokenizer.GetToken();
+            var user = _tokenizer.GetUser();
 
             if (token == null)
             {

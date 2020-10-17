@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7xEnNcmUyGUhOEaCXxBV7UsmB0p1mgYtX8I6AxZIStM8ZJMTHR+wpDkyt+vqMM06RE4mz29kCKDAOsUz5dy8aQ==",
+  "dgSpecHash": "c/nTtUDopLEkLkVEEtUoyrS7Hh/EsJKwiyvyyD9mnIfd9XuYrYGpWqSGi/OVi4ju3+FC9wu0L1DcSgZtGNQe9g==",
   "success": true,
   "projectFilePath": "D:\\Git Projects\\Maily\\Services\\Maily.API\\Maily.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jonku\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\greendonut\\10.5.3\\greendonut.10.5.3.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\hotchocolate\\10.5.3\\hotchocolate.10.5.3.nupkg.sha512",

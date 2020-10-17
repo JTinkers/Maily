@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="HotChocolate" Version="10.5.3" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="10.5.3" />
     <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.3" />
@@ -22,12 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Maily.Data\Maily.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Schema\MailGroupMails\Objects\" />
-    <Folder Include="Schema\Mails\Objects\" />
-    <Folder Include="Schema\Users\Objects\" />
   </ItemGroup>
 
 

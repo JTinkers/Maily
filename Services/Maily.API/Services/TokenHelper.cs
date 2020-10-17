@@ -2,21 +2,29 @@
 using Microsoft.AspNetCore.Http;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
-using System;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Maily.API.Services
 {
-    public class TokenHelper
+    public class Tokenizer
     {
-        private MailyContext _context { get; }
+        readonly MailyContext _context;
 
-        private IHttpContextAccessor _httpContextAccessor { get; }
+        readonly IHttpContextAccessor _httpContextAccessor;
 
-        public TokenHelper(MailyContext context, IHttpContextAccessor httpContextAccessor)
+        readonly Hasher _hasher;
+
+        public Tokenizer(MailyContext context, IHttpContextAccessor httpContextAccessor, Hasher hasher)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _hasher = hasher;
+        }
+
+        public string CreateToken(User user)
+        {
+            var data = user.Id + ";" + user.Username;
+
+            return _hasher.CreateHash(data);
         }
 
         public string GetToken()
@@ -34,9 +42,6 @@ namespace Maily.API.Services
                 return null;
 
             var user = _context.Users.SingleOrDefault(x => x.Token == token);
-
-            if (user == null)
-                return null;
 
             return user;
         }

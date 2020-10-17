@@ -11,7 +11,6 @@ namespace Maily.API.Schema.MailGroups.Types
             descriptor.Field(x => x.UserId);
             descriptor.Field(x => x.Name);
 
-            descriptor.Field(x => x.User);
             descriptor.Field(x => x.MailGroupMails);
         }
     }

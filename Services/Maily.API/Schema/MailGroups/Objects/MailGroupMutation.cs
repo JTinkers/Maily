@@ -1,28 +1,30 @@
-﻿using Maily.API.Schema.MailGroups.Objects;
+﻿using System.Linq;
 using Maily.API.Services;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
-using System.Linq;
 
-namespace Maily.API.Schema.Root.Objects
+namespace Maily.API.Schema.MailGroups.Objects
 {
-    public class Mutation
+    public class MailGroupMutation
     {
         private MailyContext _context { get; set; }
 
-        private TokenHelper _tokenHelper { get; set; }
+        private Tokenizer _tokenizer { get; set; }
 
-        public Mutation(MailyContext context, TokenHelper tokenHelper)
+        public MailGroupMutation(MailyContext context, Tokenizer tokenizer)
         {
             _context = context;
-            _tokenHelper = tokenHelper;
+            _tokenizer = tokenizer;
         }
 
         public MailGroup CreateMailGroup(MailGroupCreateInput input)
         {
+            var user = _tokenizer.GetUser();
+
             var mailGroup = new MailGroup()
             {
-                Name = input.Name
+                Name = input.Name,
+                UserId = user.Id
             };
 
             _context.Add(mailGroup);
@@ -38,7 +40,7 @@ namespace Maily.API.Schema.Root.Objects
             if (mailGroup == null)
                 return null;
 
-            var user = _tokenHelper.GetUser();
+            var user = _tokenizer.GetUser();
 
             if (mailGroup.UserId != user.Id)
                 return null;
@@ -58,7 +60,7 @@ namespace Maily.API.Schema.Root.Objects
             if (mailGroup == null)
                 return null;
 
-            var user = _tokenHelper.GetUser();
+            var user = _tokenizer.GetUser();
 
             if (mailGroup.UserId != user.Id)
                 return null;
