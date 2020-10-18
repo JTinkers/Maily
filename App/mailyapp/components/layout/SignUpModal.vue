@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model='isActive'>
+	<b-modal v-model='isActive' @close='clear'>
 		<div id='signup' class='panel is-primary'>
 			<p class='panel-heading' v-text='"Sign Up"'/>
 			<div id='fields' class='panel-block'>
@@ -39,7 +39,17 @@
 			},
 			close()
 			{
+				this.clear()
+
 				this.isActive = false
+			},
+			clear()
+			{
+				this.form =
+				{
+					username: null,
+					password: null
+				}
 			},
 			async signUp()
 			{

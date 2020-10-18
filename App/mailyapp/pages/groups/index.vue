@@ -62,7 +62,7 @@
 			form:
 			{
 				id: null,
-				name: null
+				name: ''
 			}
 		}),
 		mounted()
@@ -123,7 +123,7 @@
 
 				this.$buefy.toast.open(
 				{
-					message: 'Successfully added an address!',
+					message: 'Successfully added an group!',
 					type: 'is-success'
 				})
 
@@ -160,7 +160,7 @@
 
 				this.$buefy.toast.open(
 				{
-					message: 'Successfully updated address!',
+					message: 'Successfully updated group!',
 					type: 'is-success'
 				})
 
@@ -179,7 +179,7 @@
 				this.form =
 				{
 					id: null,
-					name: null
+					name: ''
 				}
 			},
 			async remove(id)
@@ -209,7 +209,7 @@
 
 				this.$buefy.toast.open(
 				{
-					message: 'Successfully removed the address!',
+					message: 'Successfully removed the group!',
 					type: 'is-success'
 				})
 

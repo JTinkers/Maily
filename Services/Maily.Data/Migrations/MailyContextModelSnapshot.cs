@@ -29,12 +29,14 @@ namespace Maily.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Value")
+                        .IsRequired()
                         .HasColumnType("nvarchar(512)")
                         .HasMaxLength(512);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Value")
+                        .IsUnique();
 
                     b.ToTable("Mails");
                 });
@@ -47,6 +49,7 @@ namespace Maily.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(512)")
                         .HasMaxLength(512);
 
@@ -55,7 +58,8 @@ namespace Maily.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Name")
+                        .IsUnique();
 
                     b.ToTable("MailGroups");
                 });
@@ -77,7 +81,8 @@ namespace Maily.Data.Migrations
 
                     b.HasIndex("MailGroupId");
 
-                    b.HasIndex("MailId");
+                    b.HasIndex("MailId", "MailGroupId")
+                        .IsUnique();
 
                     b.ToTable("MailGroupMails");
                 });

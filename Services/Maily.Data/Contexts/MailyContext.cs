@@ -30,6 +30,18 @@ namespace Maily.Data.Contexts
             modelBuilder.Entity<User>()
                 .HasIndex(x => x.Token)
                 .IsUnique();
+
+            modelBuilder.Entity<Mail>()
+                .HasIndex(x => new { x.UserId, x.Value })
+                .IsUnique();            
+            
+            modelBuilder.Entity<MailGroup>()
+                .HasIndex(x => new { x.UserId, x.Name })
+                .IsUnique();
+
+            modelBuilder.Entity<MailGroupMail>()
+                .HasIndex(x => new { x.MailId, x.MailGroupId})
+                .IsUnique();
         }
     }
 }

@@ -37,6 +37,9 @@ namespace Maily.API
             };
 
             _schema = SchemaBuilder.New()
+                .BindClrType<int, IntType>()
+                .BindClrType<string, StringType>()
+                .BindClrType<bool, BooleanType>()
                 .AddQueryType(x => x.Name("Query"))
                 .AddMutationType(x => x.Name("Mutation"))
                 .AddEnumType<AuthorizationErrorCodes>(x => x.BindValuesImplicitly())
@@ -60,8 +63,7 @@ namespace Maily.API
                 .AddType<MailGroupUpdateInputType>()
                 .AddType<MailGroupDeleteInputType>()
                 .AddType<MailGroupMailType>()
-                .AddType<MailGroupMailQueryType>()
-                .AddType<MailGroupMailFilterInputType>()
+                .AddType<MailGroupMailMutationType>()
                 .ModifyOptions(x => x.DefaultBindingBehavior = BindingBehavior.Explicit)
                 .Create();
         }

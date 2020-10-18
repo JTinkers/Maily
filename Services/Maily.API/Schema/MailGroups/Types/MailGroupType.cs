@@ -1,7 +1,6 @@
 ﻿using HotChocolate.Types;
 using HotChocolate.Types.Relay;
 using Maily.API.Schema.MailGroupMails.Types;
-using Maily.API.Schema.Mails.Types;
 using Maily.Data.Models;
 
 namespace Maily.API.Schema.MailGroups.Types
@@ -16,7 +15,6 @@ namespace Maily.API.Schema.MailGroups.Types
 
             descriptor.Field(x => x.MailGroupMails)
                 .UsePaging<MailGroupMailType>()
-                .UseFiltering<MailGroupMailFilterInputType>()
                 .UseSelection();
         }
     }

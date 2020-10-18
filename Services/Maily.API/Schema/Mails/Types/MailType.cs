@@ -15,7 +15,6 @@ namespace Maily.API.Schema.Mails.Types
 
             descriptor.Field(x => x.MailGroupMails)
                 .UsePaging<MailGroupMailType>()
-                .UseFiltering<MailGroupMailFilterInputType>()
                 .UseSelection();
         }
     }

@@ -11,7 +11,8 @@ export default
 		],
 		link:
 		[
-			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+			{ rel: 'stylesheet', href: 'https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css' }
 		]
 	},
 	css:
@@ -22,7 +23,8 @@ export default
 	plugins:
 	[
 		'@/plugins/axios',
-		'@/plugins/vue-plugins.js'
+		'@/plugins/vue-plugins.js',
+		'@/plugins/extensions.js'
 	],
 	components: true,
 	buildModules:

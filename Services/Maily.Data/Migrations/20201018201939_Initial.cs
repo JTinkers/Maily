@@ -28,7 +28,7 @@ namespace Maily.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 512, nullable: true),
+                    Name = table.Column<string>(maxLength: 512, nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -48,7 +48,7 @@ namespace Maily.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(maxLength: 512, nullable: true),
+                    Value = table.Column<string>(maxLength: 512, nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -92,19 +92,22 @@ namespace Maily.Data.Migrations
                 column: "MailGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MailGroupMails_MailId",
+                name: "IX_MailGroupMails_MailId_MailGroupId",
                 table: "MailGroupMails",
-                column: "MailId");
+                columns: new[] { "MailId", "MailGroupId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MailGroups_UserId",
+                name: "IX_MailGroups_UserId_Name",
                 table: "MailGroups",
-                column: "UserId");
+                columns: new[] { "UserId", "Name" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mails_UserId",
+                name: "IX_Mails_UserId_Value",
                 table: "Mails",
-                column: "UserId");
+                columns: new[] { "UserId", "Value" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Token",

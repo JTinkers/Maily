@@ -62,7 +62,7 @@
 			form:
 			{
 				id: null,
-				value: null
+				value: ''
 			}
 		}),
 		mounted()
@@ -179,7 +179,7 @@
 				this.form =
 				{
 					id: null,
-					value: null
+					value: ''
 				}
 			},
 			async remove(id)

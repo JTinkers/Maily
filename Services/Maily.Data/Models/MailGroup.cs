@@ -9,6 +9,7 @@ namespace Maily.Data.Models
 
         [MinLength(1)]
         [MaxLength(512)]
+        [Required]
         public string Name { get; set; }
 
         public int UserId { get; set; }
