@@ -77,6 +77,8 @@
 				this.$api.refreshToken()
 
 				this.close()
+
+				this.$router.push('/')
 			}
 		}
 	}

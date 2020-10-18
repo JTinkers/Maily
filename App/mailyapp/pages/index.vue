@@ -7,7 +7,7 @@
 	{
 		mounted()
 		{
-			this.$router.push('/manage')
+			this.$router.push('/setup')
 		}
 	}
 </script>
