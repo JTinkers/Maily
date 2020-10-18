@@ -42,9 +42,11 @@ namespace Maily.API
                 .AddEnumType<AuthorizationErrorCodes>(x => x.BindValuesImplicitly())
                 .AddEnumType<UserSignUpErrorCode>(x => x.BindValuesImplicitly())
                 .AddEnumType<UserSignInErrorCode>(x => x.BindValuesImplicitly())
+                .AddType(new PaginationAmountType(64))
                 .AddType<MailType>()
                 .AddType<MailQueryType>()
                 .AddType<MailMutationType>()
+                .AddType<MailFilterInputType>()
                 .AddType<MailCreateInputType>()
                 .AddType<MailUpdateInputType>()
                 .AddType<MailDeleteInputType>()
@@ -59,6 +61,7 @@ namespace Maily.API
                 .AddType<MailGroupDeleteInputType>()
                 .AddType<MailGroupMailType>()
                 .AddType<MailGroupMailQueryType>()
+                .AddType<MailGroupMailFilterInputType>()
                 .ModifyOptions(x => x.DefaultBindingBehavior = BindingBehavior.Explicit)
                 .Create();
         }

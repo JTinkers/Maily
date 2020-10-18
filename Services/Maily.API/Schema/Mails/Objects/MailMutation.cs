@@ -23,7 +23,8 @@ namespace Maily.API.Schema.Mails.Objects
 
             var mail = new Mail()
             {
-                Value = input.Value
+                Value = input.Value,
+                UserId = user.Id
             };
 
             _context.Add(mail);
@@ -64,6 +65,7 @@ namespace Maily.API.Schema.Mails.Objects
             if (mail.UserId != user.Id)
                 return null;
 
+            _context.RemoveRange(_context.MailGroupMails.Where(x => x.MailId == mail.Id));
             _context.Remove(mail);
             _context.SaveChanges();
 

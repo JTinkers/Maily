@@ -11,8 +11,11 @@ namespace Maily.API.Schema.MailGroupMails.Types
             descriptor.Field(x => x.MailId);
             descriptor.Field(x => x.MailGroupId);
 
-            descriptor.Field(x => x.Mail);
-            descriptor.Field(x => x.MailGroup);
+            descriptor.Field(x => x.Mail)
+                .UseSelection();
+
+            descriptor.Field(x => x.MailGroup)
+                .UseSelection();
         }
     }
 }

@@ -37,7 +37,7 @@ export default
 	],
 	proxy:
 	{
-		'/api': 'http://localhost:5001/'
+		'/api': 'http://localhost:5000/'
 	},
 	axios:
 	{

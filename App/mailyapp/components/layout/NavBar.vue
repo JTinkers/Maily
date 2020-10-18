@@ -2,7 +2,7 @@
 	<fragment>
 		<SignUpModal ref='signUpModal'/>
 		<LogInModal ref='logInModal'/>
-		<b-navbar>
+		<b-navbar id='navbar'>
 			<template #start>
 				<b-navbar-item tag='nuxt-link' to='/addresses'>
 					<span v-text='"Addresses"'/>
@@ -10,8 +10,8 @@
 				<b-navbar-item tag='nuxt-link' to='/groups'>
 					<span v-text='"Groups"'/>
 				</b-navbar-item>
-				<b-navbar-item tag='nuxt-link' to='/manage'>
-					<span v-text='"Manage"'/>
+				<b-navbar-item tag='nuxt-link' to='/setup'>
+					<span v-text='"Setup"'/>
 				</b-navbar-item>
 			</template>
 			<template #end>
@@ -24,7 +24,7 @@
 				<b-navbar-item v-else tag='div'>
 					<b-dropdown position='is-bottom-left'>
 						<span id='user' slot='trigger' v-text='user.nickname'/>
-						<b-dropdown-item v-text='"Log Out"' @click='logOut'/>
+						<b-dropdown-item @click='logOut' v-text='"Log Out"'/>
 					</b-dropdown>
 				</b-navbar-item>
 			</template>
@@ -35,6 +35,13 @@
 <script>
 	export default
 	{
+		computed:
+		{
+			user()
+			{
+				return this.$store.state.auth.user
+			}
+		},
 		methods:
 		{
 			openSignUpModal()
@@ -57,18 +64,16 @@
 
 				this.$api.refreshToken()
 			}
-		},
-		computed:
-		{
-			user()
-			{
-				return this.$store.state.auth.user
-			}
 		}
 	}
 </script>
 
 <style lang='scss' scoped>
+	#navbar
+	{
+		border-bottom: 1px solid rgb(240, 240, 240);
+	}
+
 	#user
 	{
 		font-weight: bold;
