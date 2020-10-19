@@ -49,32 +49,22 @@
 			},
 			async logIn()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: `mutation($username: String!, $password: String!) {
-					  userSignIn(username: $username, password: $password) {
-					    id
-					    nickname
-					    token
-					  }
-					}`,
-					variables:
-					{
-						username: this.form.username,
-						password: this.form.password
-					}
-				})).data
+				const query = `mutation($username: String!, $password: String!) {
+				  userSignIn(username: $username, password: $password) {
+					id
+					nickname
+					token
+				  }
+				}`
 
-				if(response.errors)
+				var response = await this.$api.query(query,
 				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
+					username: this.form.username,
+					password: this.form.password
+				})
 
+				if(!response)
 					return
-				}
 
 				this.$store.commit('auth/SET_AUTH', response.data.userSignIn)
 
