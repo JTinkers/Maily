@@ -39,9 +39,9 @@
 			},
 			close()
 			{
-				this.clear()
-
 				this.isActive = false
+
+				this.clear()
 			},
 			clear()
 			{
@@ -80,6 +80,8 @@
                 })
 
 				this.$api.refreshToken()
+
+				this.$router.push('/')
 
 				this.close()
 			}

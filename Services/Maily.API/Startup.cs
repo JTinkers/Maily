@@ -22,6 +22,14 @@ namespace Maily.API
 {
     public class Startup
     {
+        public IWebHostEnvironment Environment { get;  }
+
+        public IConfiguration Configuration { get; }
+
+        private ISchema _schema { get; set; }
+
+        private QueryExecutionOptions _queryExecutionOptions { get; set; }
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -68,21 +76,13 @@ namespace Maily.API
                 .Create();
         }
 
-        public IWebHostEnvironment Environment { get;  }
-
-        public IConfiguration Configuration { get; }
-
-        private ISchema _schema { get; set; }
-
-        private QueryExecutionOptions _queryExecutionOptions { get; set; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<MailyContext>(options 
                 => options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
-            services.AddHttpContextAccessor();
             services.AddGraphQL(_schema, _queryExecutionOptions);
+            services.AddHttpContextAccessor();
             services.AddScoped<Hasher>();
             services.AddScoped<Tokenizer>();
         }

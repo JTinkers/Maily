@@ -34,8 +34,8 @@
 							{{ props.row.groupCount }}
 						</b-table-column>
 						<b-table-column v-slot='props' width='180'>
-							<a class='button is-primary' @click='edit(props.row.id)' v-text='"Edit"'/>
-							<a class='button is-primary' @click='remove(props.row.id)' v-text='"Remove"'/>
+							<b-button class='is-info' type='is-info' size='is-small' outlined rounded @click='edit(props.row.id)' v-text='"Edit"'/>
+							<b-button class='is-danger' type='is-info' size='is-small' outlined rounded @click='remove(props.row.id)' v-text='"Remove"'/>
 						</b-table-column>
 					</b-table>
 				</div>

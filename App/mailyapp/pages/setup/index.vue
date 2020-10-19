@@ -1,7 +1,7 @@
 <template>
 	<div class='columns'>
 		<div class='column is-one-quarter'>
-			<div class='panel is-primary' @drop='(e) => dropDraggable(e, null)' @dragover.prevent @dragenter.prevent>
+			<div class='panel is-primary' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, null)'>
 				<p class='panel-heading' v-text='"Addresses"'/>
 				<div v-for='mail in mails' class='address panel-block' draggable @dragstart='(e) => startDragging(e, mail, null)'>
 					<span v-text='mail.value'/>
@@ -11,7 +11,7 @@
 		</div>
 		<div class='columns column is-multiline'>
 			<div v-for='mailGroup in mailGroups' :key='mailGroup.id' class='column is-one-quarter'>
-				<div class='panel' @drop='(e) => dropDraggable(e, mailGroup)' @dragover.prevent @dragenter.prevent>
+				<div class='panel' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, mailGroup)'>
 					<p class='panel-heading' v-text='mailGroup.name'/>
 					<div v-for='mail in mailGroup.mailGroupMails.nodes.map(x => x.mail)' :key='mail.id' class='address panel-block' draggable @dragstart='(e) => startDragging(e, mail, mailGroup)'>
 						<span v-text='mail.value'/>
@@ -120,6 +120,9 @@
 
 				// add missing navigation property along with mailgroupmail data
 				mailGroup.mailGroupMails.nodes.push({ mail: mail, ...response.data.addMailToMailGroup })
+
+				// sort by least emails to make columns align nicely
+				this.mailGroups.sort((a, b) => a.mailGroupMails.nodes.length - b.mailGroupMails.nodes.length)
 			},
 			async removeFromMailGroup(mail, mailGroup)
 			{
@@ -131,8 +134,11 @@
 				if(!response)
 					return
 
-				// update list, remove removed element
+				// update list, remove element
 				mailGroup.mailGroupMails.nodes.removeAt(mailGroupMailIndex)
+
+				// sort by least emails to make columns align nicely
+				this.mailGroups.sort((a, b) => a.mailGroupMails.nodes.length - b.mailGroupMails.nodes.length)
 			}
 		}
 	}
