@@ -53,33 +53,23 @@
 			},
 			async signUp()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: `mutation($nickname: String!, $username: String!, $password: String!) {
-					  userSignUp(nickname: $nickname, username: $username, password: $password) {
-					    id
-					    nickname
-					    token
-					  }
-					}`,
-					variables:
-					{
-						nickname: this.form.nickname,
-						username: this.form.username,
-						password: this.form.password
-					}
-				})).data
+				const query = `mutation($nickname: String!, $username: String!, $password: String!) {
+				  userSignUp(nickname: $nickname, username: $username, password: $password) {
+					id
+					nickname
+					token
+				  }
+				}`
 
-				if(response.errors)
+				var response = await this.$api.query(query,
 				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
+					nickname: this.form.nickname,
+					username: this.form.username,
+					password: this.form.password
+				})
 
+				if(!response)
 					return
-				}
 
 				this.$store.commit('auth/SET_AUTH', response.data.userSignUp)
 

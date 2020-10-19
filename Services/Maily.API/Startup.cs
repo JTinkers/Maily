@@ -95,7 +95,6 @@ namespace Maily.API
                 app.UsePlayground("/api");
             }
 
-            app.UseHttpsRedirection();
             app.UseGraphQL("/api");
         }
     }

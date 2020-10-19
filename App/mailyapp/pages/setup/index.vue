@@ -43,21 +43,7 @@
 		{
 			async fetch()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: DataQuery
-				})).data
-
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
-					return
-				}
+				var response = await this.$api.query(DataQuery)
 
 				this.mails = response.data.mails.nodes
 				this.mailGroups = response.data.mailGroups.nodes
@@ -130,26 +116,7 @@
 					return
 				}
 
-				var response = (await this.$api.post('/',
-				{
-					query: AddMailToMailGroupMutation,
-					variables:
-					{
-						mailId: mail.id,
-						mailGroupId: mailGroup.id
-					}
-				})).data
-
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
-					return
-				}
+				var response = await this.$api.query(AddMailToMailGroupMutation, { mailId: mail.id, mailGroupId: mailGroup.id })
 
 				// add missing navigation property along with mailgroupmail data
 				mailGroup.mailGroupMails.nodes.push({ mail: mail, ...response.data.addMailToMailGroup })
@@ -159,25 +126,10 @@
 				var mailGroupMailIndex = mailGroup.mailGroupMails.nodes.map(x => x.mailId).indexOf(mail.id)
 				var mailGroupMail = mailGroup.mailGroupMails.nodes[mailGroupMailIndex]
 
-				var response = (await this.$api.post('/',
-				{
-					query: DeleteMailFromMailGroupMutation,
-					variables:
-					{
-						id: mailGroupMail.id
-					}
-				})).data
+				var response = await this.$api.query(DeleteMailFromMailGroupMutation, { id: mailGroupMail.id })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				// update list, remove removed element
 				mailGroup.mailGroupMails.nodes.removeAt(mailGroupMailIndex)

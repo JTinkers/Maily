@@ -73,53 +73,20 @@
 		{
 			async fetch()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailGroupListQuery,
-					variables:
-					{
-						filter: this.filter
-					}
-				})).data
+				var response = await this.$api.query(MailGroupListQuery, { filter: this.filter })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.mailGroups = response.data.mailGroups.nodes
 				this.mailGroups.forEach(x => x.mailCount = x.mailGroupMails.count)
 			},
 			async add()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailGroupCreateMutation,
-					variables:
-					{
-						input:
-						{
-							name: this.form.name
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailGroupCreateMutation, {	input: { name: this.form.name } })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{
@@ -134,29 +101,10 @@
 			},
 			async save()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailGroupUpdateMutation,
-					variables:
-					{
-						input:
-						{
-							id: this.form.id,
-							name: this.form.name
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailGroupUpdateMutation, {	input: { id: this.form.id, name: this.form.name	} })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{
@@ -184,28 +132,10 @@
 			},
 			async remove(id)
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailGroupDeleteMutation,
-					variables:
-					{
-						input:
-						{
-							id: id
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailGroupDeleteMutation, {	input: { id: id	} })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{

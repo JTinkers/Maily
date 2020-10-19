@@ -1,6 +1,8 @@
 <template>
 	<div id='content'>
-		<NavBar/>
+		<no-ssr>
+			<NavBar/>
+		</no-ssr>
 		<div id='view'>
 			<nuxt/>
 		</div>
@@ -18,6 +20,15 @@
 		display: flex;
 		background: rgb(245, 245, 245);
 		min-height: 100vh;
+	}
+
+	.page-enter-active
+	{
+		animation: fadeIn 0.25s;
+	}
+	.page-leave-active
+	{
+		animation: fadeOut 0.25s;
 	}
 
 	#__nuxt, #__layout, #content

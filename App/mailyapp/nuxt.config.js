@@ -22,10 +22,20 @@ export default
 	],
 	plugins:
 	[
+		{
+			src: '@/plugins/vuex-persistedstate.js',
+			ssr: false
+		},
 		'@/plugins/axios',
 		'@/plugins/vue-plugins.js',
 		'@/plugins/extensions.js'
 	],
+	pageTransition:
+	{
+		name: 'page',
+		mode: 'out-in',
+		type: 'animation'
+	},
 	components: true,
 	buildModules:
 	[

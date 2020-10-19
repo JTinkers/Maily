@@ -73,53 +73,20 @@
 		{
 			async fetch()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailListQuery,
-					variables:
-					{
-						filter: this.filter
-					}
-				})).data
+				var response = await this.$api.query(MailListQuery, { filter: this.filter })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.mails = response.data.mails.nodes
 				this.mails.forEach(x => x.groupCount = x.mailGroupMails.count)
 			},
 			async add()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailCreateMutation,
-					variables:
-					{
-						input:
-						{
-							value: this.form.value
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailCreateMutation, { input: {	value: this.form.value } })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{
@@ -134,29 +101,10 @@
 			},
 			async save()
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailUpdateMutation,
-					variables:
-					{
-						input:
-						{
-							id: this.form.id,
-							value: this.form.value
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailUpdateMutation, { input: {	id: this.form.id, value: this.form.value } })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{
@@ -184,28 +132,10 @@
 			},
 			async remove(id)
 			{
-				var response = (await this.$api.post('/',
-				{
-					query: MailDeleteMutation,
-					variables:
-					{
-						input:
-						{
-							id: id
-						}
-					}
-				})).data
+				var response = await this.$api.query(MailDeleteMutation, { input: {	id: id } })
 
-				if(response.errors)
-				{
-					this.$buefy.toast.open(
-					{
-						message: response.errors[0].message,
-						type: 'is-danger'
-					})
-
+				if(!response)
 					return
-				}
 
 				this.$buefy.toast.open(
 				{
