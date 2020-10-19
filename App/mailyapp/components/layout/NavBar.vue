@@ -4,21 +4,15 @@
 		<LogInModal ref='logInModal'/>
 		<b-navbar id='navbar'>
 			<template #start>
-				<b-navbar-item tag='nuxt-link' to='/addresses'>
-					<span v-text='"Addresses"'/>
-				</b-navbar-item>
-				<b-navbar-item tag='nuxt-link' to='/groups'>
-					<span v-text='"Groups"'/>
-				</b-navbar-item>
-				<b-navbar-item tag='nuxt-link' to='/setup'>
-					<span v-text='"Setup"'/>
+				<b-navbar-item v-for='route in routes' :key='route.route' tag='nuxt-link' :to='route.route'>
+					<span v-text='route.label'/>
 				</b-navbar-item>
 			</template>
 			<template #end>
 				<b-navbar-item v-if='!user' tag='div'>
 	                <div class='buttons'>
-	                    <a class='button is-primary' @click='openSignUpModal' v-text='"Sign up"'/>
-	                    <a class='button is-light' @click='openLogInModal' v-text='"Log in"'/>
+	                    <b-button class='is-primary' rounded @click='openSignUpModal' v-text='"Sign up"'/>
+	                    <b-button class='is-light' rounded @click='openLogInModal' v-text='"Log in"'/>
 	                </div>
 	            </b-navbar-item>
 				<b-navbar-item v-else tag='div'>
@@ -35,6 +29,24 @@
 <script>
 	export default
 	{
+		data: () =>
+		({
+			routes:
+			[
+				{
+					label: 'Addresses',
+					route: '/addresses'
+				},
+				{
+					label: 'Groups',
+					route: '/groups'
+				},
+				{
+					label: 'Setup',
+					route: '/setup'
+				}
+			]
+		}),
 		computed:
 		{
 			user()
@@ -56,13 +68,13 @@
 			{
 				this.$store.commit('auth/SET_AUTH', null)
 
+				this.$api.refreshToken()
+
 				this.$buefy.toast.open(
 				{
 					message: 'Logged out successfully!',
 					type: 'is-success'
 				})
-
-				this.$api.refreshToken()
 			}
 		}
 	}

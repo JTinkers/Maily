@@ -1,23 +1,21 @@
 <template>
 	<div class='columns'>
 		<div class='column is-one-quarter'>
-			<div class='panel is-primary' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, null)'>
-				<p class='panel-heading' v-text='"Addresses"'/>
-				<div v-for='mail in mails' class='address panel-block' draggable @dragstart='(e) => startDragging(e, mail, null)'>
+			<Panel header='Addresses' class='is-primary' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, null)'>
+				<PanelBlock v-for='mail in mails' :key='mail.id' class='address' draggable @dragstart='(e) => startDragging(e, mail, null)'>
 					<span v-text='mail.value'/>
 					<i class='mdi mdi-drag'/>
-				</div>
-			</div>
+				</PanelBlock>
+			</Panel>
 		</div>
 		<div class='columns column is-multiline'>
 			<div v-for='mailGroup in mailGroups' :key='mailGroup.id' class='column is-one-quarter'>
-				<div class='panel' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, mailGroup)'>
-					<p class='panel-heading' v-text='mailGroup.name'/>
-					<div v-for='mail in mailGroup.mailGroupMails.nodes.map(x => x.mail)' :key='mail.id' class='address panel-block' draggable @dragstart='(e) => startDragging(e, mail, mailGroup)'>
+				<Panel :header='mailGroup.name' @dragover.prevent @dragenter.prevent @drop='(e) => dropDraggable(e, mailGroup)'>
+					<PanelBlock v-for='mail in mailGroup.mailGroupMails.nodes.map(x => x.mail)' :key='mail.id' class='address' draggable @dragstart='(e) => startDragging(e, mail, mailGroup)'>
 						<span v-text='mail.value'/>
 						<i class='mdi mdi-drag'/>
-					</div>
-				</div>
+					</PanelBlock>
+				</Panel>
 			</div>
 		</div>
 	</div>
@@ -147,11 +145,12 @@
 <style lang='scss' scoped>
 	.address
 	{
+		display: flex;
+		cursor: grab;
+
 		> :nth-child(2)
 		{
 			margin-left: auto;
 		}
-
-		cursor: grab;
 	}
 </style>

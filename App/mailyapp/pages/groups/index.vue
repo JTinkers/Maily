@@ -1,45 +1,44 @@
 <template>
 	<div class='columns'>
 		<div class='column is-one-fifth'>
-			<div class='panel'>
-				<p class='panel-heading' v-text='"Manage"'/>
-				<div class='panel-block'>
+			<Panel class='is-primary' header='Manage'>
+				<PanelBlock>
 					<div id='manageform'>
 						<b-field class='flex-grow' label='Group'>
 							<b-input v-model='form.name'/>
 						</b-field>
-						<a v-if='!form.id' class='button is-primary' @click='add' v-text='"Add"'/>
-						<a v-else class='button is-primary' @click='save' v-text='"Save"'/>
+						<b-button v-if='!form.id' class='button is-primary' @click='add' v-text='"Add"'/>
+						<b-button v-else class='button is-primary' @click='save' v-text='"Save"'/>
 					</div>
-				</div>
-			</div>
+				</PanelBlock>
+			</Panel>
 		</div>
 		<div class='column'>
-			<div class='panel'>
-				<div class='panel-heading'>
+			<Panel>
+				<template #heading>
 					<div id='listheader'>
 						<span v-text='"List"'/>
 						<b-input v-model='filter.name_contains' placeholder='Search...' icon='magnify' @input='fetch'/><!-- no debounce :(-->
 					</div>
-				</div>
-				<div class='panel-block'>
+				</template>
+				<PanelBlock>
 					<b-table class='flex-grow' :data='mailGroups'>
 						<b-table-column v-slot='props' field='id' label='Id' width='40'>
-							{{ props.row.id }}
+							<span v-text='props.row.id'/>
 						</b-table-column>
 						<b-table-column v-slot='props' field='name' label='Name'>
-							{{ props.row.name }}
+							<span v-text='props.row.name'/>
 						</b-table-column>
 						<b-table-column v-slot='props' field='groupCount' label='Uses <n> mails'>
-							{{ props.row.mailCount }}
+							<span v-text='props.row.mailCount'/>
 						</b-table-column>
 						<b-table-column v-slot='props' width='180'>
 							<b-button class='is-info' type='is-info' size='is-small' outlined rounded @click='edit(props.row.id)' v-text='"Edit"'/>
 							<b-button class='is-danger' type='is-info' size='is-small' outlined rounded @click='remove(props.row.id)' v-text='"Remove"'/>
 						</b-table-column>
 					</b-table>
-				</div>
-			</div>
+				</PanelBlock>
+			</Panel>
 		</div>
 	</div>
 </template>
