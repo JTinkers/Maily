@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Maily.API.Schema.Users.Objects
 {
+    /// <summary>
+    /// Class containing API functionality associated with <see cref="User"/> 
+    /// </summary>
     public class UserMutation
     {
         readonly MailyContext _context;
@@ -22,6 +25,14 @@ namespace Maily.API.Schema.Users.Objects
             _hasher = hasher;
         }
 
+        /// <summary>
+        /// Create and store an instance of <see cref="User"/>.
+        /// </summary>
+        /// <param name="nickname">Nickname of the user.</param>
+        /// <param name="username">A unique username of the user.</param>
+        /// <param name="password">An unhashed password.</param>
+        /// <param name="resolverContext">Resolver context used in error reporting.</param>
+        /// <returns>An instance of proxy class <see cref="UserSignUpPayload"/> containing some of user fields.</returns>
         public UserSignUpPayload SignUp(string nickname, string username, string password, IResolverContext resolverContext)
         {
             if(_context.Users.Any(x => x.Username == username))
@@ -44,7 +55,7 @@ namespace Maily.API.Schema.Users.Objects
             _context.Add(user);
             _context.SaveChanges();
 
-            // Create token from Id and Username to ensure unique hash
+            // Id and Username to ensures unique hash
             user.Token = _tokenizer.CreateToken(user.Id + ";" + user.Username);
 
             _context.Update(user);
@@ -58,6 +69,13 @@ namespace Maily.API.Schema.Users.Objects
             };
         }
 
+        /// <summary>
+        /// Retrieve data related to user of given username and password.
+        /// </summary>
+        /// <param name="username">A unique username of the user.</param>
+        /// <param name="password">An unhashed password.</param>
+        /// <param name="resolverContext">Resolver context used in error reporting.</param>
+        /// <returns>An instance of proxy class <see cref="UserSignInPayload"/> containing some of user fields.</returns>
         public UserSignInPayload SignIn(string username, string password, IResolverContext resolverContext)
         {
             var user = _context.Users.SingleOrDefault(x => x.Username == username);

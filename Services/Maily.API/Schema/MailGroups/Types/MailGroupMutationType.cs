@@ -4,6 +4,9 @@ using Maily.API.Schema.MailGroups.Objects;
 
 namespace Maily.API.Schema.MailGroups.Types
 {
+    /// <summary>
+    /// Type describing available functionality of <see cref="MailGroupMutation"/>.
+    /// </summary>
     public class MailGroupMutationType : ObjectTypeExtension<MailGroupMutation>
     {
         protected override void Configure(IObjectTypeDescriptor<MailGroupMutation> descriptor)

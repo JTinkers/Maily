@@ -5,6 +5,9 @@ using Maily.API.Schema.Mails.Objects;
 
 namespace Maily.API.Schema.Mails.Types
 {
+    /// <summary>
+    /// Type describing available functionality of <see cref="MailQuery"/>.
+    /// </summary>
     public class MailQueryType : ObjectTypeExtension<MailQuery>
     {
         public object MailFilterInputType { get; private set; }

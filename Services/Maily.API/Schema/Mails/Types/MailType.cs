@@ -5,6 +5,9 @@ using Maily.Data.Models;
 
 namespace Maily.API.Schema.Mails.Types
 {
+    /// <summary>
+    /// Type describing available fields of <see cref="Mail"/>.
+    /// </summary>
     public class MailType : ObjectType<Mail>
     {
         protected override void Configure(IObjectTypeDescriptor<Mail> descriptor)

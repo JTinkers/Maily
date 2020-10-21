@@ -11,4 +11,3 @@ D:\Git Projects\Maily\Services\Maily.Data\bin\Debug\netcoreapp3.1\Maily.Data.run
 D:\Git Projects\Maily\Services\Maily.Data\obj\Debug\netcoreapp3.1\Maily.Data.genruntimeconfig.cache
 D:\Git Projects\Maily\Services\Maily.Data\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Git Projects\Maily\Services\Maily.Data\bin\Debug\netcoreapp3.1\appsettings.Development.json
-D:\Git Projects\Maily\Services\Maily.Data\obj\Debug\netcoreapp3.1\Maily.Data.csproj.CoreCompileInputs.cache

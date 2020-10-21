@@ -1,5 +1,8 @@
 ﻿namespace Maily.API.Schema.Users.Objects
 {
+    /// <summary>
+    /// Proxy containing fields required in process signing up the <see cref="User"/>.
+    /// </summary>
     public class UserSignUpPayload
     {
         public int Id { get; set; }

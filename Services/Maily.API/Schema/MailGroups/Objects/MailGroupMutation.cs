@@ -17,6 +17,11 @@ namespace Maily.API.Schema.MailGroups.Objects
             _tokenizer = tokenizer;
         }
 
+        /// <summary>
+        /// Create and store an instance of <see cref="MailGroup"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of created <see cref="MailGroup"/>.</returns>
         public MailGroup CreateMailGroup(MailGroupCreateInput input)
         {
             var user = _tokenizer.GetUser();
@@ -33,6 +38,11 @@ namespace Maily.API.Schema.MailGroups.Objects
             return mailGroup;
         }
 
+        /// <summary>
+        /// Update a stored instance of <see cref="MailGroup"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of updated <see cref="MailGroup"/>.</returns>
         public MailGroup UpdateMailGroup(MailGroupUpdateInput input)
         {
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);
@@ -53,6 +63,11 @@ namespace Maily.API.Schema.MailGroups.Objects
             return mailGroup;
         }
 
+        /// <summary>
+        /// Delete a stored instance of <see cref="MailGroup"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of removed <see cref="MailGroup"/>.</returns>
         public MailGroup DeleteMailGroup(MailGroupDeleteInput input)
         {
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);

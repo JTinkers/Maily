@@ -1,4 +1,5 @@
-﻿using Bcrypt = BCrypt.Net.BCrypt;
+﻿using Castle.Core.Internal;
+using Bcrypt = BCrypt.Net.BCrypt;
 
 namespace Maily.API.Services
 {
@@ -14,6 +15,9 @@ namespace Maily.API.Services
         /// <returns>Hashed string data.</returns>
         public string CreateHash(string input)
         {
+            if (input.IsNullOrEmpty())
+                return null;
+
             var salt = Bcrypt.GenerateSalt();
 
             return Bcrypt.HashPassword(input, salt);
@@ -27,6 +31,9 @@ namespace Maily.API.Services
         /// <returns>Whether string data matches the hash.</returns>
         public bool IsMatching(string input, string hash)
         {
+            if (input == null || hash == null)
+                return false;
+
             return Bcrypt.Verify(input, hash);
         }
     }

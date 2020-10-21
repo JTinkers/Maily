@@ -5,6 +5,9 @@ using Maily.Data.Models;
 
 namespace Maily.API.Schema.MailGroups.Types
 {
+    /// <summary>
+    /// Type describing available fields of <see cref="MailGroup"/>.
+    /// </summary>
     public class MailGroupType : ObjectType<MailGroup>
     {
         protected override void Configure(IObjectTypeDescriptor<MailGroup> descriptor)

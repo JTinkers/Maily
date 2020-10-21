@@ -1,6 +1,4 @@
-﻿using HotChocolate;
-using HotChocolate.Resolvers;
-using Maily.API.Services;
+﻿using Maily.API.Services;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +6,10 @@ using System.Linq;
 
 namespace Maily.API.Schema.MailGroupMails.Objects
 {
+    /// <summary>
+    /// Class containing API functionality associated with <see cref="Mail"/> 
+    /// to <see cref="MailGroup"/> attachments.
+    /// </summary>
     public class MailGroupMailMutation
     {
         readonly MailyContext _context;
@@ -20,15 +22,22 @@ namespace Maily.API.Schema.MailGroupMails.Objects
             _tokenizer = tokenizer;
         }
 
+        /// <summary>
+        /// Attach mail to a mail group.
+        /// </summary>
+        /// <param name="mailId">Id of mail to attach.</param>
+        /// <param name="mailGroupId">Id of group to attach to.</param>
+        /// <returns>Associate entry of mail attached to mail group.</returns>
         public MailGroupMail AddMailToMailGroup(int mailId, int mailGroupId)
         {
             var user = _tokenizer.GetUser();
 
             var mail = _context.Mails.SingleOrDefault(x => x.Id == mailId);
-            var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == mailGroupId);
 
             if (mail.UserId != user.Id)
                 return null;
+            
+            var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == mailGroupId);
 
             if (mailGroup.UserId != user.Id)
                 return null;
@@ -45,6 +54,11 @@ namespace Maily.API.Schema.MailGroupMails.Objects
             return mailGroupMail;
         }
 
+        /// <summary>
+        /// Remove attachment of mail to a mail group.
+        /// </summary>
+        /// <param name="id">Id of associate entry describing attachment.</param>
+        /// <returns>Removed attachment.</returns>
         public MailGroupMail DeleteMailFromMailGroup(int id)
         {
             var user = _tokenizer.GetUser();

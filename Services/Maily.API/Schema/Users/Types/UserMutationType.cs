@@ -3,6 +3,9 @@ using Maily.API.Schema.Users.Objects;
 
 namespace Maily.API.Schema.Mails.Types
 {
+    /// <summary>
+    /// Type describing available functionality of <see cref="UserMutation"/>.
+    /// </summary>
     public class UserMutationType : ObjectTypeExtension<UserMutation>
     {
         protected override void Configure(IObjectTypeDescriptor<UserMutation> descriptor)

@@ -5,6 +5,9 @@ using Maily.Data.Models;
 
 namespace Maily.API.Schema.Mails.Objects
 {
+    /// <summary>
+    /// Class containing API functionality associated with <see cref="Mail"/>.
+    /// </summary>
     public class MailQuery
     {
         private MailyContext _context { get; set; }
@@ -17,6 +20,10 @@ namespace Maily.API.Schema.Mails.Objects
             _tokenizer = tokenizer;
         }
 
+        /// <summary>
+        /// Fetch query resulting in a collection of mails.
+        /// </summary>
+        /// <returns>Query leading to mails.</returns>
         public IQueryable<Mail> GetAll()
         {
             var user = _tokenizer.GetUser();

@@ -4,6 +4,9 @@ using Maily.API.Schema.Mails.Objects;
 
 namespace Maily.API.Schema.Mails.Types
 {
+    /// <summary>
+    /// Type describing available methods of the <see cref="MailMutation"/>.
+    /// </summary>
     public class MailMutationType : ObjectTypeExtension<MailMutation>
     {
         protected override void Configure(IObjectTypeDescriptor<MailMutation> descriptor)

@@ -44,6 +44,7 @@ namespace Maily.API
                 ForceSerialExecution = true
             };
 
+            // register API types
             _schema = SchemaBuilder.New()
                 .BindClrType<int, IntType>()
                 .BindClrType<string, StringType>()

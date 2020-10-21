@@ -5,6 +5,9 @@ using Maily.API.Services;
 
 namespace Maily.API.Middleware.Authorization
 {
+    /// <summary>
+    /// Class responsible for token authorization over HTTP protocol.
+    /// </summary>
     public class Authorizator
     {
         private FieldDelegate _next { get; set; }
@@ -17,6 +20,11 @@ namespace Maily.API.Middleware.Authorization
             _tokenizer = tokenizer;
         }
 
+        /// <summary>
+        /// Verify whether token stored inside HTTP request header is valid and leads to an authorized user.
+        /// </summary>
+        /// <param name="context">Middleware context used in resolving.</param>
+        /// <returns>Task result of the request.</returns>
         public async Task InvokeAsync(IMiddlewareContext context)
         {
             var token = _tokenizer.GetToken();

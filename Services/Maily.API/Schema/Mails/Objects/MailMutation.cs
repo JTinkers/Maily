@@ -5,6 +5,9 @@ using Maily.Data.Models;
 
 namespace Maily.API.Schema.Mails.Objects
 {
+    /// <summary>
+    /// Class containing API functionality associated with <see cref="Mail"/> 
+    /// </summary>
     public class MailMutation
     {
         private MailyContext _context { get; set; }
@@ -17,6 +20,11 @@ namespace Maily.API.Schema.Mails.Objects
             _tokenizer = tokenizer;
         }
 
+        /// <summary>
+        /// Create and store an instance of <see cref="Mail"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of created <see cref="Mail"/>.</returns>
         public Mail CreateMail(MailCreateInput input)
         {
             var user = _tokenizer.GetUser();
@@ -33,6 +41,11 @@ namespace Maily.API.Schema.Mails.Objects
             return mail;
         }
 
+        /// <summary>
+        /// Update an instance of <see cref="Mail"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of updated <see cref="Mail"/>.</returns>
         public Mail UpdateMail(MailUpdateInput input)
         {
             var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
@@ -53,6 +66,11 @@ namespace Maily.API.Schema.Mails.Objects
             return mail;
         }
 
+        /// <summary>
+        /// Delete an instance of <see cref="Mail"/>.
+        /// </summary>
+        /// <param name="input">Proxy containing required fields.</param>
+        /// <returns>An instance of deleted <see cref="Mail"/>.</returns>
         public Mail DeleteMail(MailDeleteInput input)
         {
             var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
