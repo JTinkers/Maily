@@ -32,14 +32,17 @@ namespace Maily.API.Schema.MailGroupMails.Objects
         {
             var user = _tokenizer.GetUser();
 
+            if (user == null)
+                return null;
+
             var mail = _context.Mails.SingleOrDefault(x => x.Id == mailId);
 
-            if (mail.UserId != user.Id)
+            if (mail == null || mail.UserId != user.Id)
                 return null;
             
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == mailGroupId);
 
-            if (mailGroup.UserId != user.Id)
+            if (mailGroup == null || mailGroup.UserId != user.Id)
                 return null;
 
             var mailGroupMail = new MailGroupMail()
@@ -63,6 +66,9 @@ namespace Maily.API.Schema.MailGroupMails.Objects
         {
             var user = _tokenizer.GetUser();
 
+            if (user == null)
+                return null;
+
             var mailGroupMail = _context.MailGroupMails
                 .Include(x => x.Mail)
                 .SingleOrDefault(x => x.Id == id);
@@ -70,7 +76,7 @@ namespace Maily.API.Schema.MailGroupMails.Objects
             if (mailGroupMail == null)
                 return null;
 
-            if (mailGroupMail.Mail.UserId != user.Id)
+            if (mailGroupMail.Mail == null || mailGroupMail.Mail.UserId != user.Id)
                 return null;
 
             _context.Remove(mailGroupMail);

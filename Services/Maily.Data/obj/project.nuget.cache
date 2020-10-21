@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NH1zm9gOFopqHOCGU2l1PKWegqQ/EpBizFhtKf7ay1fJ4fLCWjuhCjEdgwT7gduQUr2GVDdS8yqQGSVOIafc2A==",
+  "dgSpecHash": "L/VMcxYVol1yLQ/Te03uR5ZNql+jrjPAiYHMkO9+VzX/n5sBzePPG9VfnsB3/i4JK4rlRU/wzCcgy033Q7BTHw==",
   "success": true,
   "projectFilePath": "D:\\Git Projects\\Maily\\Services\\Maily.Data\\Maily.Data.csproj",
   "expectedPackageFiles": [
@@ -40,9 +40,7 @@
     "C:\\Users\\jonku\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
-    "C:\\Users\\jonku\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
-    "F:\\Microsoft\\Xamarin\\NuGet\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\jonku\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
