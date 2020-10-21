@@ -27,7 +27,13 @@ namespace Maily.API.Schema.Mails.Objects
         /// <returns>An instance of created <see cref="Mail"/>.</returns>
         public Mail CreateMail(MailCreateInput input)
         {
+            if (input == null)
+                return null;
+
             var user = _tokenizer.GetUser();
+
+            if (user == null)
+                return null;
 
             var mail = new Mail()
             {
@@ -48,12 +54,18 @@ namespace Maily.API.Schema.Mails.Objects
         /// <returns>An instance of updated <see cref="Mail"/>.</returns>
         public Mail UpdateMail(MailUpdateInput input)
         {
+            if (input == null)
+                return null;
+
             var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
 
             if (mail == null)
                 return null;
 
             var user = _tokenizer.GetUser();
+
+            if (user == null)
+                return null;
 
             if (mail.UserId != user.Id)
                 return null;
@@ -73,12 +85,18 @@ namespace Maily.API.Schema.Mails.Objects
         /// <returns>An instance of deleted <see cref="Mail"/>.</returns>
         public Mail DeleteMail(MailDeleteInput input)
         {
+            if (input == null)
+                return null;
+
             var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
 
             if (mail == null)
                 return null;
 
             var user = _tokenizer.GetUser();
+
+            if (user == null)
+                return null;
 
             if (mail.UserId != user.Id)
                 return null;

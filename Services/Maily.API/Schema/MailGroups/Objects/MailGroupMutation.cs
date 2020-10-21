@@ -2,6 +2,7 @@
 using Maily.API.Services;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
+using Microsoft.AspNetCore.Connections.Features;
 
 namespace Maily.API.Schema.MailGroups.Objects
 {
@@ -24,7 +25,13 @@ namespace Maily.API.Schema.MailGroups.Objects
         /// <returns>An instance of created <see cref="MailGroup"/>.</returns>
         public MailGroup CreateMailGroup(MailGroupCreateInput input)
         {
+            if (input == null)
+                return null;
+
             var user = _tokenizer.GetUser();
+
+            if (user == null)
+                return null;
 
             var mailGroup = new MailGroup()
             {
@@ -45,12 +52,18 @@ namespace Maily.API.Schema.MailGroups.Objects
         /// <returns>An instance of updated <see cref="MailGroup"/>.</returns>
         public MailGroup UpdateMailGroup(MailGroupUpdateInput input)
         {
+            if (input == null)
+                return null;
+
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);
+
+            var user = _tokenizer.GetUser();
 
             if (mailGroup == null)
                 return null;
 
-            var user = _tokenizer.GetUser();
+            if (user == null)
+                return null;
 
             if (mailGroup.UserId != user.Id)
                 return null;
@@ -70,12 +83,18 @@ namespace Maily.API.Schema.MailGroups.Objects
         /// <returns>An instance of removed <see cref="MailGroup"/>.</returns>
         public MailGroup DeleteMailGroup(MailGroupDeleteInput input)
         {
+            if (input == null)
+                return null;
+
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);
+
+            var user = _tokenizer.GetUser();
 
             if (mailGroup == null)
                 return null;
 
-            var user = _tokenizer.GetUser();
+            if (user == null)
+                return null;
 
             if (mailGroup.UserId != user.Id)
                 return null;

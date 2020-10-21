@@ -35,6 +35,9 @@ namespace Maily.API.Schema.Users.Objects
         /// <returns>An instance of proxy class <see cref="UserSignUpPayload"/> containing some of user fields.</returns>
         public UserSignUpPayload SignUp(string nickname, string username, string password, IResolverContext resolverContext)
         {
+            if (nickname == null || username == null || password == null)
+                return null;
+
             if(_context.Users.Any(x => x.Username == username))
             {
                 resolverContext.ReportError(ErrorBuilder.New()
@@ -78,6 +81,9 @@ namespace Maily.API.Schema.Users.Objects
         /// <returns>An instance of proxy class <see cref="UserSignInPayload"/> containing some of user fields.</returns>
         public UserSignInPayload SignIn(string username, string password, IResolverContext resolverContext)
         {
+            if (username == null || password == null)
+                return null;
+
             var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
             if (user == null)
