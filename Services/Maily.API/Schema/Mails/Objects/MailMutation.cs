@@ -2,6 +2,7 @@
 using Maily.API.Services;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Maily.API.Schema.Mails.Objects
 {
@@ -32,14 +33,14 @@ namespace Maily.API.Schema.Mails.Objects
 
             var user = _tokenizer.GetUser();
 
-            if (user == null)
-                return null;
-
             var mail = new Mail()
             {
                 Value = input.Value,
                 UserId = user.Id
             };
+
+            if (!isRequestValid(mail))
+                return null;
 
             _context.Add(mail);
             _context.SaveChanges();
@@ -59,15 +60,7 @@ namespace Maily.API.Schema.Mails.Objects
 
             var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
 
-            if (mail == null)
-                return null;
-
-            var user = _tokenizer.GetUser();
-
-            if (user == null)
-                return null;
-
-            if (mail.UserId != user.Id)
+            if (!isRequestValid(mail))
                 return null;
 
             mail.Value = input.Value;
@@ -88,24 +81,30 @@ namespace Maily.API.Schema.Mails.Objects
             if (input == null)
                 return null;
 
-            var mail = _context.Mails.SingleOrDefault(x => x.Id == input.Id);
+            var mail = _context.Mails.Include(x => x.MailGroupMails)
+                .SingleOrDefault(x => x.Id == input.Id);
 
-            if (mail == null)
+            if (!isRequestValid(mail))
                 return null;
 
-            var user = _tokenizer.GetUser();
-
-            if (user == null)
-                return null;
-
-            if (mail.UserId != user.Id)
-                return null;
-
-            _context.RemoveRange(_context.MailGroupMails.Where(x => x.MailId == mail.Id));
+            _context.RemoveRange(mail.MailGroupMails);
             _context.Remove(mail);
             _context.SaveChanges();
 
             return mail;
+        }
+
+        private bool isRequestValid(Mail mail)
+        {
+            var user = _tokenizer.GetUser();
+
+            if (mail == null || user == null)
+                return false;
+
+            if (mail.UserId != user.Id)
+                return false;
+
+            return true;
         }
     }
 }

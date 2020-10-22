@@ -3,6 +3,7 @@ using Maily.API.Services;
 using Maily.Data.Contexts;
 using Maily.Data.Models;
 using Microsoft.AspNetCore.Connections.Features;
+using Microsoft.EntityFrameworkCore;
 
 namespace Maily.API.Schema.MailGroups.Objects
 {
@@ -30,14 +31,14 @@ namespace Maily.API.Schema.MailGroups.Objects
 
             var user = _tokenizer.GetUser();
 
-            if (user == null)
-                return null;
-
             var mailGroup = new MailGroup()
             {
                 Name = input.Name,
                 UserId = user.Id
             };
+
+            if (!isRequestValid(mailGroup))
+                return null;
 
             _context.Add(mailGroup);
             _context.SaveChanges();
@@ -57,15 +58,7 @@ namespace Maily.API.Schema.MailGroups.Objects
 
             var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);
 
-            var user = _tokenizer.GetUser();
-
-            if (mailGroup == null)
-                return null;
-
-            if (user == null)
-                return null;
-
-            if (mailGroup.UserId != user.Id)
+            if (!isRequestValid(mailGroup))
                 return null;
 
             mailGroup.Name = input.Name;
@@ -86,23 +79,30 @@ namespace Maily.API.Schema.MailGroups.Objects
             if (input == null)
                 return null;
 
-            var mailGroup = _context.MailGroups.SingleOrDefault(x => x.Id == input.Id);
+            var mailGroup = _context.MailGroups.Include(x => x.MailGroupMails)
+                .SingleOrDefault(x => x.Id == input.Id);
 
-            var user = _tokenizer.GetUser();
-
-            if (mailGroup == null)
+            if (!isRequestValid(mailGroup))
                 return null;
 
-            if (user == null)
-                return null;
-
-            if (mailGroup.UserId != user.Id)
-                return null;
-
+            _context.RemoveRange(mailGroup.MailGroupMails);
             _context.Remove(mailGroup);
             _context.SaveChanges();
 
             return mailGroup;
+        }
+
+        private bool isRequestValid(MailGroup mailGroup)
+        {
+            var user = _tokenizer.GetUser();
+
+            if (mailGroup == null || user == null)
+                return false;
+
+            if (mailGroup.UserId != user.Id)
+                return false;
+
+            return true;
         }
     }
 }

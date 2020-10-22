@@ -55,6 +55,7 @@ namespace Maily.API.Schema.Users.Objects
                 Password = _hasher.CreateHash(password)
             };
 
+            // Add and save user to generate Id
             _context.Add(user);
             _context.SaveChanges();
 

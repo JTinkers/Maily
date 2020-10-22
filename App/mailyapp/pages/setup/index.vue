@@ -46,9 +46,6 @@
 				this.mails = response.data.mails.nodes
 				this.mailGroups = response.data.mailGroups.nodes
 
-				// sort by least emails to make columns align nicely
-				this.mailGroups.sort((a, b) => a.mailGroupMails.nodes.length - b.mailGroupMails.nodes.length)
-
 				// add easy navigation property
 				this.mailGroups.forEach(x => x.mailGroupMails.nodes.forEach(y =>
 				{
@@ -118,9 +115,6 @@
 
 				// add missing navigation property along with mailgroupmail data
 				mailGroup.mailGroupMails.nodes.push({ mail: mail, ...response.data.addMailToMailGroup })
-
-				// sort by least emails to make columns align nicely
-				this.mailGroups.sort((a, b) => a.mailGroupMails.nodes.length - b.mailGroupMails.nodes.length)
 			},
 			async removeFromMailGroup(mail, mailGroup)
 			{
@@ -134,9 +128,6 @@
 
 				// update list, remove element
 				mailGroup.mailGroupMails.nodes.removeAt(mailGroupMailIndex)
-
-				// sort by least emails to make columns align nicely
-				this.mailGroups.sort((a, b) => a.mailGroupMails.nodes.length - b.mailGroupMails.nodes.length)
 			}
 		}
 	}
